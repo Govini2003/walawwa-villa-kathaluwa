@@ -19,8 +19,8 @@ section{padding:96px 0}
 header{position:fixed;inset:0 0 auto;z-index:10;transition:background .3s,box-shadow .3s}
 header.solid{background:rgba(246,241,230,.96);box-shadow:0 1px 0 var(--line)}
 nav{display:flex;align-items:center;justify-content:space-between;height:72px}
-nav .brand{font:600 1.5rem "Cormorant Garamond",serif;text-decoration:none;color:#fff;letter-spacing:.06em}
-header.solid .brand{color:var(--green)}
+nav .brand{display:flex;align-items:center}
+nav .brand img{display:block;width:76px;height:60px;object-fit:contain;background:var(--paper);border-radius:4px}
 nav ul{display:flex;gap:28px;list-style:none;padding:0}
 nav ul a{text-decoration:none;color:#fff;font-size:15px}
 header.solid nav ul a{color:var(--ink)}
@@ -32,7 +32,7 @@ header.solid .call{border-color:var(--gold);color:var(--gold)}
 .hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(28,40,32,.5),rgba(28,40,32,.72))}
 .hero>div{position:relative;z-index:1;max-width:760px}
-.hero .logo{width:min(300px,62vw);border-radius:50%;margin:0 auto 28px;display:block;background:var(--paper);padding:14px;aspect-ratio:1;object-fit:cover;box-shadow:0 12px 40px rgba(0,0,0,.3);animation:rise 1s ease both}
+.hero .logo{width:min(280px,68vw);border-radius:8px;margin:0 auto 28px;display:block;aspect-ratio:1;object-fit:contain;box-shadow:0 12px 40px rgba(0,0,0,.3);animation:rise 1s ease both}
 @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 .hero h1{color:#fff;font-size:clamp(2.6rem,7vw,5rem);animation:rise 1s .15s ease both}
 .hero p{font:italic 400 1.5rem "Cormorant Garamond",serif;margin:14px 0 34px;animation:rise 1s .3s ease both}

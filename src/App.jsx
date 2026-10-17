@@ -43,6 +43,7 @@ function Hero() {
         <p>Luxury stay near the ocean, Ahangama, Galle</p>
         <div className="row">
           <a className="btn" href="#contact">Check availability</a>
+          <a className="btn" href={D.BOOKING_URL} target="_blank" rel="noopener noreferrer">Book on Booking.com</a>
           <a className="btn ghost" href="#about">Explore the villa</a>
         </div>
       </div>

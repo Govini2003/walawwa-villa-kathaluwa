@@ -18,9 +18,9 @@ export const NAV = [
   ['gallery', 'Gallery'], ['contact', 'Book'],
 ]
 export const ROOMS = [
-  { img: 'rooms/room1.jpg', name: 'Master suite', text: 'Spacious bedroom with private bathroom and veranda.' },
-  { img: 'rooms/room2.jpg', name: 'Deluxe room', text: 'Quiet room with garden view and air conditioning.' },
-  { img: 'rooms/room3.jpg', name: 'Family room', text: 'Extra space for families and small groups.' },
+  { img: 'rooms/img2.png', name: 'Master suite', text: 'Spacious bedroom with private bathroom and veranda.' },
+  { img: 'rooms/img5.png', name: 'Deluxe room', text: 'Quiet room with garden view and air conditioning.' },
+  { img: 'rooms/img8.png', name: 'Family room', text: 'Extra space for families and small groups.' },
 ]
 export const AMENITIES = [
   ['Near the beach', 'Walk or take a short tuk-tuk ride'],
@@ -30,4 +30,17 @@ export const AMENITIES = [
   ['Garden and veranda', 'Shaded space to relax'],
   ['Free parking', 'On the property'],
 ]
-export const GALLERY = [1, 2, 3, 4, 5, 6].map(n => `gallery/${n}.jpg`)
+export const GALLERY = [
+  'rooms/img1.png',
+  'rooms/img2.png',
+  'gallery/img3.png',
+  'gallery/img4.png',
+  'rooms/img5.png',
+  'rooms/img6.png',
+  'rooms/img7.png',
+  'rooms/img8.png',
+  'rooms/img9.png',
+  'rooms/img10.png',
+  'rooms/img11.png',
+  'rooms/img12.png',
+]

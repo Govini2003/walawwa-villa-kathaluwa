@@ -24,7 +24,9 @@ function Header() {
   return (
     <header className={solid ? 'solid' : ''}>
       <div className="wrap"><nav>
-        <a className="brand" href="#top">WALAWWA</a>
+        <a className="brand" href="#top" aria-label="Walawwa Villa Kathaluwa home">
+          <img src={asset('gallery/logo.png')} alt="Walawwa Villa Kathaluwa" />
+        </a>
         <ul>{D.NAV.map(([id, label]) => <li key={id}><a href={`#${id}`}>{label}</a></li>)}</ul>
         <a className="call" href={`tel:${D.PHONE_TEL}`}>{D.PHONE_DISPLAY}</a>
       </nav></div>
@@ -36,9 +38,9 @@ function Hero() {
   const [ok, setOk] = useState(true)
   return (
     <section className="hero">
-      {ok && <img src={asset('hero.jpg')} alt="" onError={() => setOk(false)} />}
+      {ok && <img src={asset('gallery/img3.png')} alt="" onError={() => setOk(false)} />}
       <div>
-        <img className="logo" src={asset('logo.png')} alt="Walawwa Villa Kathaluwa logo" />
+        <img className="logo" src={asset('gallery/logo.png')} alt="Walawwa Villa Kathaluwa logo" />
         <h1>Walawwa Villa Kathaluwa</h1>
         <p>Luxury stay near the ocean, Ahangama, Galle</p>
         <div className="row">
@@ -54,7 +56,7 @@ function Hero() {
 function About() {
   return (
     <section id="about"><div className="wrap about">
-      <Photo src="about.jpg" alt="Walawwa Villa Kathaluwa" />
+      <Photo src="gallery/img4.png" alt="The villa's sitting area and veranda" />
       <div>
         <h2>A traditional walawwa, a short walk from the sea</h2>
         <p>Walawwa Villa sits in Walawwaththa, Kathaluwa, on the quiet southern coast of Sri Lanka. Tiled roofs, shaded verandas and palm gardens give it the feel of a classic Sri Lankan manor home, with the comforts you expect from a luxury stay.</p>
@@ -97,7 +99,7 @@ const Gallery = () => (
   <section id="gallery" className="sandbg"><div className="wrap">
     <h2>Gallery</h2>
     <div className="gal">
-      {D.GALLERY.map((g, i) => <Photo key={g} src={g} alt={`Villa photo ${i + 1}`} />)}
+      {D.GALLERY.map((g, i) => <Photo key={g} src={g} alt={`Walawwa Villa photo ${i + 1}`} />)}
     </div>
   </div></section>
 )

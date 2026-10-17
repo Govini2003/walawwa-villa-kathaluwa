@@ -62,6 +62,10 @@ header.solid .call{border-color:var(--gold);color:var(--gold)}
 /* contact */
 .contact{background:var(--green);color:#e9e4d3}
 .contact h2{color:#fff}
+.booking-options{margin-top:32px}
+.booking-options h3{color:#fff;margin-bottom:14px}
+.booking-options>div{display:flex;flex-wrap:wrap;gap:10px}
+.booking-options .btn{padding:10px 18px}
 .cgrid{display:grid;grid-template-columns:1fr 1.1fr;gap:64px}
 .contact a{color:#e8cf8a}
 .contact dt{font:500 1.2rem "Cormorant Garamond",serif;color:#e8cf8a;margin-top:20px}

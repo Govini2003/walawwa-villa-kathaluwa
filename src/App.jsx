@@ -121,6 +121,16 @@ function Contact() {
           <dt>Address</dt><dd>{D.ADDRESS}</dd>
           <dt>Find us</dt><dd><a href={D.MAP_URL} target="_blank" rel="noopener noreferrer">Open in Google Maps</a></dd>
         </dl>
+        <div className="booking-options">
+          <h3>Book with your preferred site</h3>
+          <div>
+            {D.BOOKING_PLATFORMS.map(([name, url]) => (
+              <a className="btn" key={name} href={url} target="_blank" rel="noopener noreferrer">
+                {name}
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
       <form onSubmit={submit}>
         <label>Your name<input required autoComplete="name" value={f.name} onChange={set('name')} /></label>

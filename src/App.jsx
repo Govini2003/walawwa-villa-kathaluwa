@@ -15,8 +15,17 @@ function Photo({ src, alt = '', className = 'ph' }) {
 
 function Header() {
   const [solid, setSolid] = useState(false)
+  const [active, setActive] = useState(D.NAV[0][0])
   useEffect(() => {
-    const on = () => setSolid(window.scrollY > 60)
+    const on = () => {
+      setSolid(window.scrollY > 60)
+      let cur = D.NAV[0][0]
+      for (const [id] of D.NAV) {
+        const el = document.getElementById(id)
+        if (el && el.getBoundingClientRect().top <= window.innerHeight * 0.4) cur = id
+      }
+      setActive(cur)
+    }
     on()
     window.addEventListener('scroll', on, { passive: true })
     return () => window.removeEventListener('scroll', on)
@@ -27,7 +36,7 @@ function Header() {
         <a className="brand" href="#top" aria-label="Walawwa Villa Kathaluwa home">
           <img src={asset('gallery/logo.png')} alt="Walawwa Villa Kathaluwa" />
         </a>
-        <ul>{D.NAV.map(([id, label]) => <li key={id}><a href={`#${id}`}>{label}</a></li>)}</ul>
+        <ul>{D.NAV.map(([id, label]) => <li key={id}><a href={`#${id}`} className={active === id ? 'active' : ''}>{label}</a></li>)}</ul>
         <a className="call" href={`tel:${D.PHONE_TEL}`}>{D.PHONE_DISPLAY}</a>
       </nav></div>
     </header>
@@ -40,12 +49,12 @@ function Hero() {
     <section className="hero">
       {ok && <img src={asset('gallery/img3.png')} alt="" onError={() => setOk(false)} />}
       <div>
-        <img className="logo" src={asset('gallery/logo.png')} alt="Walawwa Villa Kathaluwa logo" />
+        <span className="eyebrow">Ahangama · Galle · Sri Lanka</span>
         <h1>Walawwa Villa Kathaluwa</h1>
-        <p>Luxury stay near the ocean, Ahangama, Galle</p>
+        <span className="rule" aria-hidden="true" />
+        <p>Luxury stay near the ocean</p>
         <div className="row">
           <a className="btn" href="#contact">Check availability</a>
-          <a className="btn" href={D.BOOKING_URL} target="_blank" rel="noopener noreferrer">Book on Booking.com</a>
           <a className="btn ghost" href="#about">Explore the villa</a>
         </div>
       </div>

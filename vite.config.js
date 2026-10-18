@@ -1,15 +1,7 @@
-export default defineConfig({ base: './', plugins: [react()] })
-``` :chatgpt-content-reference{index="0"}
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
-
-More importantly, your `index.html` has:
-
-```html
-<script type="module" src="/src/main.jsx"></script>
-``` :chatgpt-content-reference{index="1"}
-
-
-For GitHub Pages at:
-
-```text
-https://govini2003.github.io/walawwa-villa-kathaluwa/
+export default defineConfig({
+  base: '/walawwa-villa-kathaluwa/',
+  plugins: [react()]
+})

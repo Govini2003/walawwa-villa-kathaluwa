@@ -47,6 +47,5 @@ export const GALLERY = [
   'gallery/img13.png',
   'rooms/img10.png',
   'rooms/img6.png',
-  'rooms/img1.png',
   'rooms/img12.png',
 ]

@@ -47,7 +47,7 @@ function Hero() {
   const [ok, setOk] = useState(true)
   return (
     <section className="hero">
-      {ok && <img src={asset('gallery/img3.png')} alt="" onError={() => setOk(false)} />}
+      {ok && <img src={asset('gallery/img15.png')} alt="" onError={() => setOk(false)} />}
       <div>
         <span className="eyebrow">Ahangama · Galle · Sri Lanka</span>
         <h1>Walawwa Villa Kathaluwa</h1>

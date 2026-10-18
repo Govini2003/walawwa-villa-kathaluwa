@@ -21,9 +21,11 @@ header.solid{background:rgba(246,241,230,.96);box-shadow:0 1px 0 var(--line)}
 nav{display:flex;align-items:center;justify-content:space-between;height:72px}
 nav .brand{display:flex;align-items:center}
 nav .brand img{display:block;width:76px;height:60px;object-fit:contain;background:var(--paper);border-radius:4px}
-nav ul{display:flex;gap:28px;list-style:none;padding:0}
-nav ul a{text-decoration:none;color:#fff;font-size:15px}
+nav ul{display:flex;gap:48px;list-style:none;padding:0}
+nav ul a{text-decoration:none;color:#fff;font:500 1.25rem "Cormorant Garamond",Georgia,serif;letter-spacing:.02em;padding-bottom:6px;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+nav ul a:hover,nav ul a.active{color:#d4ad4a;border-bottom-color:#d4ad4a}
 header.solid nav ul a{color:var(--ink)}
+header.solid nav ul a:hover,header.solid nav ul a.active{color:var(--gold);border-bottom-color:var(--gold)}
 nav .call{border:1px solid #fff;padding:8px 18px;color:#fff;text-decoration:none;font-size:15px}
 header.solid .call{border-color:var(--gold);color:var(--gold)}
 @media(max-width:820px){nav ul{display:none}}
@@ -31,10 +33,11 @@ header.solid .call{border-color:var(--gold);color:var(--gold)}
 .hero{min-height:100svh;display:grid;place-items:center;text-align:center;color:#fff;padding:120px 24px 80px;background:linear-gradient(rgba(28,40,32,.55),rgba(28,40,32,.7)),var(--green);position:relative}
 .hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(28,40,32,.5),rgba(28,40,32,.72))}
-.hero>div{position:relative;z-index:1;max-width:760px}
-.hero .logo{width:min(280px,68vw);border-radius:8px;margin:0 auto 28px;display:block;aspect-ratio:1;object-fit:contain;box-shadow:0 12px 40px rgba(0,0,0,.3);animation:rise 1s ease both}
+.hero>div{position:relative;z-index:1;max-width:980px}
+.hero .eyebrow{display:block;text-transform:uppercase;letter-spacing:.35em;font-size:.8rem;font-weight:400;color:#e6cf93;margin-bottom:22px;animation:rise 1s ease both}
+.hero .rule{display:block;width:72px;height:2px;background:var(--gold);margin:26px auto 0;animation:rise 1s .2s ease both}
 @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-.hero h1{color:#fff;font-size:clamp(2.6rem,7vw,5rem);animation:rise 1s .15s ease both}
+.hero h1{color:#fff;font-size:clamp(3rem,8vw,6rem);text-shadow:0 4px 30px rgba(0,0,0,.45);animation:rise 1s .15s ease both}
 .hero p{font:italic 400 1.5rem "Cormorant Garamond",serif;margin:14px 0 34px;animation:rise 1s .3s ease both}
 .hero .row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;animation:rise 1s .45s ease both}
 /* about */
@@ -56,9 +59,21 @@ header.solid .call{border-color:var(--gold);color:var(--gold)}
 .am span{font-size:15px}
 /* gallery */
 .gal{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:40px}
-.gal .ph{aspect-ratio:1}
-.gal .ph:nth-child(1),.gal .ph:nth-child(6){grid-column:span 2;aspect-ratio:2/1}
+.gal-item{display:block;padding:0;border:0;background:none;cursor:zoom-in;font:inherit}
+.gal .ph{aspect-ratio:1;transition:transform .3s}
+.gal-item:hover .ph{transform:scale(1.02)}
+.gal-item:nth-child(1),.gal-item:nth-child(6){grid-column:span 2}
+.gal-item:nth-child(1) .ph,.gal-item:nth-child(6) .ph{aspect-ratio:2/1}
 @media(max-width:600px){.gal{grid-template-columns:1fr 1fr}}
+.lightbox{position:fixed;inset:0;z-index:100;background:rgba(15,20,17,.94);display:flex;align-items:center;justify-content:center;padding:56px 72px;animation:fade .2s ease}
+.lightbox img{max-width:100%;max-height:100%;object-fit:contain;box-shadow:0 10px 60px rgba(0,0,0,.5)}
+.lb-btn{position:absolute;background:none;border:0;color:#fff;cursor:pointer;line-height:1;opacity:.8;transition:opacity .2s}
+.lb-btn:hover{opacity:1}
+.lb-close{top:14px;right:22px;font-size:44px}
+.lb-prev,.lb-next{top:50%;transform:translateY(-50%);font-size:64px;padding:10px 16px}
+.lb-prev{left:8px}.lb-next{right:8px}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@media(max-width:600px){.lightbox{padding:56px 12px}.lb-prev,.lb-next{top:auto;bottom:8px;transform:none}}
 /* contact */
 .contact{background:var(--green);color:#e9e4d3}
 .contact h2{color:#fff}

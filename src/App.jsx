@@ -15,8 +15,17 @@ function Photo({ src, alt = '', className = 'ph' }) {
 
 function Header() {
   const [solid, setSolid] = useState(false)
+  const [active, setActive] = useState(D.NAV[0][0])
   useEffect(() => {
-    const on = () => setSolid(window.scrollY > 60)
+    const on = () => {
+      setSolid(window.scrollY > 60)
+      let cur = D.NAV[0][0]
+      for (const [id] of D.NAV) {
+        const el = document.getElementById(id)
+        if (el && el.getBoundingClientRect().top <= window.innerHeight * 0.4) cur = id
+      }
+      setActive(cur)
+    }
     on()
     window.addEventListener('scroll', on, { passive: true })
     return () => window.removeEventListener('scroll', on)
@@ -27,7 +36,7 @@ function Header() {
         <a className="brand" href="#top" aria-label="Walawwa Villa Kathaluwa home">
           <img src={asset('gallery/logo.png')} alt="Walawwa Villa Kathaluwa" />
         </a>
-        <ul>{D.NAV.map(([id, label]) => <li key={id}><a href={`#${id}`}>{label}</a></li>)}</ul>
+        <ul>{D.NAV.map(([id, label]) => <li key={id}><a href={`#${id}`} className={active === id ? 'active' : ''}>{label}</a></li>)}</ul>
         <a className="call" href={`tel:${D.PHONE_TEL}`}>{D.PHONE_DISPLAY}</a>
       </nav></div>
     </header>
@@ -38,14 +47,14 @@ function Hero() {
   const [ok, setOk] = useState(true)
   return (
     <section className="hero">
-      {ok && <img src={asset('gallery/img3.png')} alt="" onError={() => setOk(false)} />}
+      {ok && <img src={asset('gallery/img15.png')} alt="" onError={() => setOk(false)} />}
       <div>
-        <img className="logo" src={asset('gallery/logo.png')} alt="Walawwa Villa Kathaluwa logo" />
+        <span className="eyebrow">Ahangama · Galle · Sri Lanka</span>
         <h1>Walawwa Villa Kathaluwa</h1>
-        <p>Luxury stay near the ocean, Ahangama, Galle</p>
+        <span className="rule" aria-hidden="true" />
+        <p>Luxury stay near the ocean</p>
         <div className="row">
           <a className="btn" href="#contact">Check availability</a>
-          <a className="btn" href={D.BOOKING_URL} target="_blank" rel="noopener noreferrer">Book on Booking.com</a>
           <a className="btn ghost" href="#about">Explore the villa</a>
         </div>
       </div>
@@ -95,14 +104,47 @@ const Amenities = () => (
   </div></section>
 )
 
-const Gallery = () => (
-  <section id="gallery" className="sandbg"><div className="wrap">
-    <h2>Gallery</h2>
-    <div className="gal">
-      {D.GALLERY.map((g, i) => <Photo key={g} src={g} alt={`Walawwa Villa photo ${i + 1}`} />)}
+function Gallery() {
+  const [open, setOpen] = useState(null)
+  const n = D.GALLERY.length
+  const close = () => setOpen(null)
+  const step = d => setOpen(i => (i + d + n) % n)
+  useEffect(() => {
+    if (open === null) return
+    const onKey = e => {
+      if (e.key === 'Escape') close()
+      else if (e.key === 'ArrowLeft') step(-1)
+      else if (e.key === 'ArrowRight') step(1)
+    }
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [open === null])
+  return (
+    <section id="gallery" className="sandbg"><div className="wrap">
+      <h2>Gallery</h2>
+      <div className="gal">
+        {D.GALLERY.map((g, i) => (
+          <button key={g} type="button" className="gal-item" onClick={() => setOpen(i)} aria-label={`View photo ${i + 1} larger`}>
+            <Photo src={g} alt={`Walawwa Villa photo ${i + 1}`} />
+          </button>
+        ))}
+      </div>
     </div>
-  </div></section>
-)
+    {open !== null && (
+      <div className="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" onClick={close}>
+        <button type="button" className="lb-btn lb-close" onClick={close} aria-label="Close">×</button>
+        <button type="button" className="lb-btn lb-prev" onClick={e => { e.stopPropagation(); step(-1) }} aria-label="Previous photo">‹</button>
+        <img src={asset(D.GALLERY[open])} alt={`Walawwa Villa photo ${open + 1}`} onClick={e => e.stopPropagation()} />
+        <button type="button" className="lb-btn lb-next" onClick={e => { e.stopPropagation(); step(1) }} aria-label="Next photo">›</button>
+      </div>
+    )}
+    </section>
+  )
+}
 
 function Contact() {
   const today = new Date().toISOString().split('T')[0]

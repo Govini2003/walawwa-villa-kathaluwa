@@ -59,9 +59,21 @@ header.solid .call{border-color:var(--gold);color:var(--gold)}
 .am span{font-size:15px}
 /* gallery */
 .gal{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:40px}
-.gal .ph{aspect-ratio:1}
-.gal .ph:nth-child(1),.gal .ph:nth-child(6){grid-column:span 2;aspect-ratio:2/1}
+.gal-item{display:block;padding:0;border:0;background:none;cursor:zoom-in;font:inherit}
+.gal .ph{aspect-ratio:1;transition:transform .3s}
+.gal-item:hover .ph{transform:scale(1.02)}
+.gal-item:nth-child(1),.gal-item:nth-child(6){grid-column:span 2}
+.gal-item:nth-child(1) .ph,.gal-item:nth-child(6) .ph{aspect-ratio:2/1}
 @media(max-width:600px){.gal{grid-template-columns:1fr 1fr}}
+.lightbox{position:fixed;inset:0;z-index:100;background:rgba(15,20,17,.94);display:flex;align-items:center;justify-content:center;padding:56px 72px;animation:fade .2s ease}
+.lightbox img{max-width:100%;max-height:100%;object-fit:contain;box-shadow:0 10px 60px rgba(0,0,0,.5)}
+.lb-btn{position:absolute;background:none;border:0;color:#fff;cursor:pointer;line-height:1;opacity:.8;transition:opacity .2s}
+.lb-btn:hover{opacity:1}
+.lb-close{top:14px;right:22px;font-size:44px}
+.lb-prev,.lb-next{top:50%;transform:translateY(-50%);font-size:64px;padding:10px 16px}
+.lb-prev{left:8px}.lb-next{right:8px}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@media(max-width:600px){.lightbox{padding:56px 12px}.lb-prev,.lb-next{top:auto;bottom:8px;transform:none}}
 /* contact */
 .contact{background:var(--green);color:#e9e4d3}
 .contact h2{color:#fff}

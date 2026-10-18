@@ -104,14 +104,47 @@ const Amenities = () => (
   </div></section>
 )
 
-const Gallery = () => (
-  <section id="gallery" className="sandbg"><div className="wrap">
-    <h2>Gallery</h2>
-    <div className="gal">
-      {D.GALLERY.map((g, i) => <Photo key={g} src={g} alt={`Walawwa Villa photo ${i + 1}`} />)}
+function Gallery() {
+  const [open, setOpen] = useState(null)
+  const n = D.GALLERY.length
+  const close = () => setOpen(null)
+  const step = d => setOpen(i => (i + d + n) % n)
+  useEffect(() => {
+    if (open === null) return
+    const onKey = e => {
+      if (e.key === 'Escape') close()
+      else if (e.key === 'ArrowLeft') step(-1)
+      else if (e.key === 'ArrowRight') step(1)
+    }
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [open === null])
+  return (
+    <section id="gallery" className="sandbg"><div className="wrap">
+      <h2>Gallery</h2>
+      <div className="gal">
+        {D.GALLERY.map((g, i) => (
+          <button key={g} type="button" className="gal-item" onClick={() => setOpen(i)} aria-label={`View photo ${i + 1} larger`}>
+            <Photo src={g} alt={`Walawwa Villa photo ${i + 1}`} />
+          </button>
+        ))}
+      </div>
     </div>
-  </div></section>
-)
+    {open !== null && (
+      <div className="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" onClick={close}>
+        <button type="button" className="lb-btn lb-close" onClick={close} aria-label="Close">×</button>
+        <button type="button" className="lb-btn lb-prev" onClick={e => { e.stopPropagation(); step(-1) }} aria-label="Previous photo">‹</button>
+        <img src={asset(D.GALLERY[open])} alt={`Walawwa Villa photo ${open + 1}`} onClick={e => e.stopPropagation()} />
+        <button type="button" className="lb-btn lb-next" onClick={e => { e.stopPropagation(); step(1) }} aria-label="Next photo">›</button>
+      </div>
+    )}
+    </section>
+  )
+}
 
 function Contact() {
   const today = new Date().toISOString().split('T')[0]
